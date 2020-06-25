@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TechJobsMVC.Data;
@@ -20,8 +21,10 @@ namespace TechJobsMVC.Controllers
             {"positionType", "Position Type"},
             {"coreCompetency", "Skill"}
         };
+        
         internal static Dictionary<string, List<JobField>> TableChoices = new Dictionary<string, List<JobField>>()
         {
+            {"all", JobData.GetAll()},
             {"employer", JobData.GetAllEmployers()},
             {"location", JobData.GetAllLocations()},
             {"positionType", JobData.GetAllPositionTypes()},
@@ -32,6 +35,7 @@ namespace TechJobsMVC.Controllers
         {
             ViewBag.columns = ColumnChoices;
             ViewBag.tableChoices = TableChoices;
+            ViewBag.all = JobData.GetAll();
             ViewBag.employers = JobData.GetAllEmployers();
             ViewBag.locations = JobData.GetAllLocations();
             ViewBag.positionTypes = JobData.GetAllPositionTypes();
